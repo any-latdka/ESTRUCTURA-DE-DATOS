@@ -1,1 +1,123 @@
+package ico.fesa.unam.mx.listas.simple;
+
+
+public class ListaLigada<T> {
+
+    private Nodo<T> head;
+    private int tamanio;
+
+    public ListaLigada() {
+        this.head = null;
+        this.tamanio = 0;
+    }
+
+    public boolean estaVacia() {
+        return this.head == null;
+    }
+
+    public int getTamanio() {
+        Nodo<T> aux = this.head;
+        int contador = 0;
+        while (aux != null) {
+            contador++;
+            aux = aux.getSiguiente();
+        }
+        return contador;
+    }
+
+    public void agregarAlFinal(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+        if (head == null) {
+            head = nuevo;
+        } else {
+            Nodo<T> aux = this.head;
+            while (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(nuevo);
+        }
+    }
+
+    public void agregarAlInicio(T dato) {
+        this.head = new Nodo<>(dato, this.head);
+    }
+
+    public void agregarDespuesDe(T referencia, T dato) {
+        Nodo<T> auxiliar = this.head;
+        while (auxiliar != null && !auxiliar.getDato().equals(referencia)) {
+            auxiliar = auxiliar.getSiguiente();
+        }
+        if (auxiliar != null) {
+            auxiliar.setSiguiente(new Nodo<>(dato, auxiliar.getSiguiente()));
+        }
+    }
+
+    public void eliminar(int pos) {
+        if (pos < 0 || pos >= getTamanio()) {
+            throw new IndexOutOfBoundsException("Posición fuera de rango");
+        }
+        Nodo<T> aux = this.head;
+        if (pos == 0) {
+            this.head = this.head.getSiguiente();
+        } else {
+            for (int i = 0; i < pos - 1; i++) {
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(aux.getSiguiente().getSiguiente());
+        }
+    }
+
+    public void eliminarElPrimero() {
+        if (head != null) {
+            this.head = this.head.getSiguiente();
+        }
+    }
+
+    public void eliminarElFinal() {
+        if (head == null) return;
+        if (head.getSiguiente() == null) {
+            head = null;
+        } else {
+            Nodo<T> aux = this.head;
+            while (aux.getSiguiente().getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(null);
+        }
+    }
+
+    public int buscar(T valor) {
+        if (estaVacia()) {
+            return -1;
+        }
+        Nodo<T> auxiliar = this.head;
+        int contador = 0;
+        while (auxiliar != null && !auxiliar.getDato().equals(valor)) {
+            auxiliar = auxiliar.getSiguiente();
+            contador++;
+        }
+        return (auxiliar == null) ? -1 : contador;
+    }
+
+    public void actualizar(T aBuscar, T dato) {
+        Nodo<T> auxiliar = this.head;
+        while (auxiliar != null && !auxiliar.getDato().equals(aBuscar)) {
+            auxiliar = auxiliar.getSiguiente();
+        }
+        if (auxiliar != null) {
+            auxiliar.setDato(dato);
+        }
+    }
+
+    public void transversal() {
+        Nodo<T> aux = this.head;
+        while (aux != null) {
+            System.out.print(aux.getDato() + " --> ");
+            aux = aux.getSiguiente();
+        }
+        System.out.println("null");
+    }
+
+
+}
 
