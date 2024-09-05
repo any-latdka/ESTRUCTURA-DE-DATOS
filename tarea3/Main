@@ -1,0 +1,56 @@
+package ico.fesa.unam.mx.listas.simple;
+
+public class Main {
+        public static void main(String[] args) {
+
+            ListaLigada<SmartPhone> lista = new ListaLigada<>();
+
+            // Agregar 5 SmartPhones a la lista
+            lista.agregarAlFinal(new SmartPhone("Samsung", "Galaxy S21", 799.99));
+            lista.agregarAlFinal(new SmartPhone("Apple", "iPhone 12", 999.99));
+            lista.agregarAlFinal(new SmartPhone("Google", "Pixel 5", 699.99));
+            lista.agregarAlFinal(new SmartPhone("Xiaomi", "Mi 11", 599.99));
+            lista.agregarAlFinal(new SmartPhone("OnePlus", "OnePlus 9", 729.99));
+
+            // Imprimir contenido inicial
+            System.out.println("====================================");
+            System.out.println("Contenido inicial de la lista:");
+            System.out.println("====================================");
+            lista.transversal();
+            System.out.println();
+
+            // Eliminar el elemento en la posición 2
+            lista.eliminar(2);
+            System.out.println("====================================");
+            System.out.println("Eliminar el elemento en la posición 2:");
+            System.out.println("====================================");
+            lista.transversal();
+            System.out.println();
+
+            // Actualizar el segundo elemento
+            lista.actualizar(new SmartPhone("Apple", "iPhone 12", 999.99),
+                    new SmartPhone("Apple", "iPhone 13", 1099.99));
+            System.out.println("====================================");
+            System.out.println("Actualizar el segundo elemento:");
+            System.out.println("====================================");
+            lista.transversal();
+            System.out.println();
+
+            // Agregar un elemento al inicio
+            lista.agregarAlInicio(new SmartPhone("Sony", "Xperia 5", 899.99));
+            // Agregar un elemento al final
+            lista.agregarAlFinal(new SmartPhone("Huawei", "P40", 799.99));
+            System.out.println("====================================");
+            System.out.println("Agregar un elemento al inicio y otro al final:");
+            System.out.println("====================================");
+            lista.transversal();
+            System.out.println();
+
+            // Eliminar el primer elemento
+            lista.eliminarElPrimero();
+            System.out.println("====================================");
+            System.out.println("Eliminar el primer elemento:");
+            System.out.println("====================================");
+            lista.transversal();
+        }
+}
