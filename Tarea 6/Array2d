@@ -1,0 +1,106 @@
+package ico.fesa.unam.mx.arreglos;
+
+public class Array2d {
+    Character[][] data;
+    int rowSize;
+    int colSize;
+
+    public Array2d(int ren, int col) {
+        this.rowSize = ren;
+        this.colSize = col;
+        this.data = new Character[ren][col];
+    }
+
+    public void clear(Character dato) {
+        for (int i = 0; i < this.rowSize; i++) {
+            for (int j = 0; j < this.colSize; j++) {
+                this.data[i][j] = dato;
+            }
+        }
+    }
+
+    public int getRowSize() {
+        return rowSize;
+    }
+
+    public int getColSize() {
+        return colSize;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < this.rowSize; i++) {
+            for (int j = 0; j < this.colSize; j++) {
+                str.append(this.data[i][j]).append(" "); // Añadir el valor de cada celda al String
+            }
+            str = new StringBuilder(str + "\n");
+        }
+        return str.toString();
+    }
+
+    public void setItem(int ren, int col, Character dato) {
+        if (ren >= 0 && ren < this.rowSize && col >= 0 && col < this.colSize) {
+            this.data[ren][col] = dato;
+        } else {
+            System.out.println("Índices fuera de rango");
+        }
+    }
+
+    public Character getItem(int ren, int col) {
+        if (ren >= 0 && ren < this.rowSize && col >= 0 && col < this.colSize) {
+            return this.data[ren][col];
+        } else {
+            System.out.println("Índices fuera de rango");
+        }
+        return '\0';
+    }
+
+    /////////////////////////////////////////////////////////////////// Celulas vivas
+    public int contarVecinosVivos(int ren, int col) {
+        int vivos = 0;
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (!(i == 0 && j == 0)) {
+                    int filaVecina = (ren + i + rowSize) % rowSize;
+                    int colVecina = (col + j + colSize) % colSize;
+                    if (data[filaVecina][colVecina] == 'O') {
+                        vivos++;
+                    }
+                }
+            }
+        }
+        return vivos;
+    }
+
+    // Actualizar tablero
+    public void actualizarTablero() {
+        Array2d nuevoTablero = new Array2d(rowSize, colSize);
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < colSize; j++) {
+                int vecinosVivos = contarVecinosVivos(i, j);
+                if (data[i][j] == 'O') {
+                    if (vecinosVivos == 2 || vecinosVivos == 3) {
+                        nuevoTablero.setItem(i, j, 'O'); ///////////// Celula sigue viva
+                    } else {
+                        nuevoTablero.setItem(i, j, 'X'); ///////////// Celula muere
+                    }
+                } else {
+                    if (vecinosVivos == 3) {
+                        nuevoTablero.setItem(i, j, 'O'); ///////////// Nace una célula viva
+                    } else {
+                        nuevoTablero.setItem(i, j, 'X'); ///////////// Sigue muerta la celula
+                    }
+                }
+            }
+        }
+
+        ////////////////////////////////////////////////////////////// Conservar los valores nuevos en el tablero
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < colSize; j++) {
+                data[i][j] = nuevoTablero.getItem(i, j);
+            }
+        }
+    }
+}
