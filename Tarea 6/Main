@@ -1,0 +1,24 @@
+package ico.fesa.unam.mx.arreglos;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Array2d juego = new Array2d(5, 5);
+        juego.clear('X');
+
+        //////////////////////////////////////// Celulas vivas (ejemplo) (0 es viva. X muerta)
+        juego.setItem(1, 2, 'O');
+        juego.setItem(2, 3, 'O');
+        juego.setItem(3, 1, 'O');
+        juego.setItem(3, 2, 'O');
+        juego.setItem(3, 3, 'O');
+
+        int generaciones = 5;
+
+        for (int i = 0; i < generaciones; i++) {
+            System.out.println("Generacion " + (i + 1) + ":");
+            System.out.println(juego);
+            juego.actualizarTablero();
+            Thread.sleep(1000); //////////// Tiempo entre generaciones
+        }
+    }
+}
