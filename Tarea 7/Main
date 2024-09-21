@@ -1,0 +1,65 @@
+package ico.fesa.unam.mx.colas;
+
+public class Main {
+    public static void main(String[] args) {
+
+        ColaADT<Paciente> colaPacientes = new ColaADT<>();
+        //////////////////////////////////////////////////////// Agregar 3 pacientes:
+        Paciente p1 = new Paciente("Anne Mondragon", 1);
+        Paciente p2 = new Paciente("Christopher William", 2);
+        Paciente p3 = new Paciente("Alan Ruiz", 3);
+
+        colaPacientes.encolar(p1);
+        colaPacientes.encolar(p2);
+        colaPacientes.encolar(p3);
+
+        ///////////////////////////////////////////// Mostrar el contenido de la cola:
+        System.out.println("\nPacientes en la cola:");
+        System.out.println(colaPacientes);
+        System.out.println();
+
+        /////////////////////////////////// Mostrar el siguiente paciente sin sacarlo:
+        System.out.println("El siguiente es:\n " + colaPacientes.frente());
+        System.out.println();
+
+        /////////////////////////////////////////////// Atender al siguiente paciente:
+        System.out.println("Atendiendo a:\n " + colaPacientes.desEncolar());
+        System.out.println();
+
+        ///////////////////////////////////////////////Mostrar elcontenido de la cola:
+        System.out.println("Pacientes en espea:");
+        System.out.println(colaPacientes);
+        System.out.println();
+
+        //////////////////////////////////////////////// Atender al siguiente paciente:
+        System.out.println("Atendiendo a:\n " + colaPacientes.desEncolar());///Chris
+        System.out.println();
+
+
+        //////////////////////////////////////////// Mostrar el estado final de la cola:
+        System.out.println("Pacientes restantes en la cola:");
+        System.out.println(colaPacientes);
+        System.out.println();
+
+        ////////////////////////////////////////////////// Agregar 2 nuevos pacientes:
+        Paciente p4 = new Paciente("Sasha Gil", 4);
+        Paciente p5 = new Paciente("Alejandro Suarez", 5);
+        colaPacientes.encolar(p4);
+        colaPacientes.encolar(p5);
+
+        ///////////////////////////////////////////// Mostrar el contenido de la cola:
+        System.out.println("//////////////////Se formaron nuevos pacientes, la fila nueva es:");
+        System.out.println(colaPacientes);
+        System.out.println();
+
+        //////////////////////////////////////////////// Atender al siguiente paciente:
+        System.out.println("Atendiendo a:\n " + colaPacientes.desEncolar());
+        System.out.println();
+
+        //////////////////////////////////////////// Mostrar el estado final de la cola:
+        System.out.println("Pacientes restantes en la cola:");
+        System.out.println(colaPacientes);
+        System.out.println();
+
+    }
+}
