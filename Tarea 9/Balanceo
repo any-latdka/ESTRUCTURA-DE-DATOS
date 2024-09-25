@@ -1,0 +1,28 @@
+package ico.fesa.unam.mx.pilas;
+
+public class Balanceo {
+
+    public static boolean revisionBalanceo(String texto) {
+        Stack<Character> pila = new Stack<>();
+
+        for (char c : texto.toCharArray()) {
+            /////////////////// Meter a la pila el parentesis de entrada
+            if (c == '{' || c == '(' || c == '[') {
+                pila.push(c);
+            }
+            ///////////////// Parentesis de cierre--> hay uno de entrada?
+            else if (c == '}' || c == ')' || c == ']') {
+                if (pila.isEmpty()) {
+                    return false;
+                }
+                char llaveEntrada = pila.pop();
+                if ((c == '}' && llaveEntrada != '{') ||
+                        (c == ')' && llaveEntrada != '(') ||
+                        (c == ']' && llaveEntrada != '[')) {
+                    return false;
+                }
+            }
+        }
+        return pila.isEmpty();
+    }
+}
