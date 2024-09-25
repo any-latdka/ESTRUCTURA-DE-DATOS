@@ -1,0 +1,53 @@
+package ico.fesa.unam.mx.pilas;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+
+public class Stack<E> {
+    private ArrayList<E> datos;
+
+    public Stack() {
+        this.datos = new ArrayList<>();
+    }
+
+    ///////////////////////////////////////////////////////////////Esta vacia?
+    public boolean isEmpty() {
+        return this.datos.isEmpty();
+    }
+
+    ///////////////////////////////////////////////////// Elementos en la pila
+    public int size() {
+        return this.datos.size();
+    }
+
+    /////////////////////////////////////// Saca el ultimo elemento de la pila
+    public E pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return this.datos.remove(this.datos.size() - 1);
+    }
+
+    // /////////////////////////////////// Copia el ultimo elemento sin sacarlo
+    public E peek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return this.datos.get(this.datos.size() - 1);
+    }
+
+    //////////////////////////////////////////// Agregar un elemento a la pila
+    public void push(E valor) {
+        this.datos.add(valor);
+    }
+
+
+    @Override
+    public String toString() {
+        String result = "\nContenido de la pila:\n";
+        for (int i = datos.size() - 1; i >= 0; i--) {
+            result += datos.get(i) + "\n";
+        }
+        return result;
+    }
+}
