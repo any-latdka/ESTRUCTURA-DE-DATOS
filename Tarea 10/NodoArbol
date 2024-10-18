@@ -1,0 +1,63 @@
+package ico.fesa.unam.mx.arboles;
+
+public class NodoArbol<T> {
+    private T valor;
+    private NodoArbol<T> hijoIzquierdo;
+    private NodoArbol<T> hijoDerecho;
+
+    public NodoArbol(T valor) {
+        this.valor = valor;
+    }
+
+    public T getValor() {
+        return valor;
+    }
+
+    public void setValor(T valor) {
+        this.valor = valor;
+    }
+
+    public NodoArbol<T> getHijoIzquierdo() {
+        return hijoIzquierdo;
+    }
+
+    public void setHijoIzquierdo(NodoArbol<T> hijoIzquierdo) {
+        this.hijoIzquierdo = hijoIzquierdo;
+    }
+
+    public NodoArbol<T> getHijoDerecho() {
+        return hijoDerecho;
+    }
+
+    public void setHijoDerecho(NodoArbol<T> hijoDerecho) {
+        this.hijoDerecho = hijoDerecho;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(valor);
+
+        if (hijoIzquierdo != null || hijoDerecho != null) {
+            sb.append(" -> [");
+
+            if (hijoIzquierdo != null) {
+                sb.append("Izq: ").append(hijoIzquierdo);
+            } else {
+                sb.append("Izq: null");
+            }
+
+            sb.append(", ");
+
+            if (hijoDerecho != null) {
+                sb.append("Der: ").append(hijoDerecho);
+            } else {
+                sb.append("Der: null");
+            }
+
+            sb.append("]");
+        }
+
+        return sb.toString();
+    }
+}
