@@ -1,0 +1,29 @@
+package ico.fesa.unam.mx.arboles;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("--------------Arbol 1----------------------------");
+        NodoArbol<String> raiz = new NodoArbol<>("10");
+        //////////////////////////////////Hijos de 10
+        raiz.setHijoIzquierdo(new NodoArbol<>("15"));
+        raiz.setHijoDerecho(new NodoArbol<>("5"));
+        //////////////////////////////////Hijo de 15
+        raiz.getHijoIzquierdo().setHijoIzquierdo(new NodoArbol<>("25"));
+        //////////////////////////////////Hijo de 5
+        raiz.getHijoDerecho().setHijoIzquierdo(new NodoArbol<>("1"));
+
+        System.out.println(raiz);
+        System.out.println("--------------Arbol 2----------------------------");
+
+        NodoArbol<String> raiz2 = new NodoArbol<>("Diego");
+        /////////////////////////////////Hijos Diego
+        raiz2.setHijoIzquierdo(new NodoArbol<>("Pedro"));
+        raiz2.setHijoDerecho(new NodoArbol<>("Mario"));
+        /////////////////////////////////Hijos Pedro
+        raiz2.getHijoIzquierdo().setHijoIzquierdo(new NodoArbol<>("Susan"));
+        raiz2.getHijoIzquierdo().setHijoDerecho(new NodoArbol<>("Diana"));
+
+        System.out.println(raiz2);
+
+    }
+}
