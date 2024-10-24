@@ -1,0 +1,55 @@
+package ico.fesa.unam.mx.recursividad;
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class Potencia {
+
+    public static int potencia(int a, int b) {
+        ////////////////////////////////////////////////// Caso base: a^b si b=0 ∴ a= 1
+        if (b == 0) {
+            return 1;
+        }
+        //////////////////////////// Recursividad - Caso: "a" * potencia de "a" a (b-1)
+        return a * potencia(a, b - 1);
+    }
+
+////////////////////////////////////////// Hacer dinamico el programa con un usuario xd
+
+    public static void main(String[] args) {
+        System.out.println("\n---------------------------------------------------------\nNumero elevado a un exponente (a^b).\nEste metodo solo es funcional para numeros enteros.");
+
+        Scanner scanner = new Scanner(System.in); 
+
+        int numero = 0;
+        int exponente = 0;
+
+        while (true) {
+            System.out.print("Ingrese un numero: ");
+            try {
+                numero = scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println(numero + "No es valido, ingrese un numero.");
+                scanner.next();
+            }
+        }
+
+        while (true) {
+            System.out.print("Ingrese el exponente: ");
+            try {
+                exponente = scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println(exponente + "No es valido, ingrese un exponente valido.");
+                scanner.next();
+            }
+        }
+
+        int resultado = potencia(numero, exponente);
+
+        System.out.println(numero + " elevado a la " + exponente + " es: " + resultado);
+
+        scanner.close();
+    }
+
+}
