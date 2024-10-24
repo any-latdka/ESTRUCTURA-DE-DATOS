@@ -1,0 +1,47 @@
+package ico.fesa.unam.mx.recursividad;
+import java.util.Stack;
+
+public class RecursividadPila {
+
+    public static int sacarNumeroMedio(Stack<Integer> pila, int size, int contador) {
+        /////////////////////// Caso base: si el contador ha llegado al punto medio
+        if (contador == size / 2) {
+            return pila.pop();
+        }
+
+        int numero = pila.pop();
+
+        ////////////////////////////// Llamar a la clase para el siguiente elemento
+        int numeroMedio = sacarNumeroMedio(pila, size, contador + 1);
+        pila.push(numero);
+
+        return numeroMedio;
+    }
+
+    ///////////////////////////////////////////////////////////////////// Recursion
+    public static int sacarNumeroMedio(Stack<Integer> pila) {
+        if (pila.isEmpty()) {
+            return -1;
+        }
+        int size = pila.size();
+        return sacarNumeroMedio(pila, size, 0);
+    }
+
+    public static void main(String[] args) {
+        ////////////////////////////////////////////////////////////////// Ejemplo
+        Stack<Integer> pila = new Stack<>();
+        pila.push(10);
+        pila.push(11);
+        pila.push(12);
+        pila.push(13);
+        pila.push(14);
+        System.out.println("\n----------------------------------------------------------------");
+        System.out.println("\nLa pila es: " + pila);
+
+        int numeroMedio = sacarNumeroMedio(pila);
+
+        System.out.println("\nEl valor en la posicion media es: " + numeroMedio);
+
+    }
+
+}
