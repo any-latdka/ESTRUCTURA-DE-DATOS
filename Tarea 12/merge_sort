@@ -1,0 +1,89 @@
+package ico.fesa.unam.mx.recursividad;
+
+public class merge_sort {
+
+    public static void merge_sort(int[] data) {
+        if (data.length > 1) {
+            int mitad = data.length / 2;
+
+            int[] izquierda = new int[mitad];
+            int[] derecha = new int[data.length - mitad];
+
+            ///////////////////////////////////// Copiar datos en sub arreglos
+            for (int i = 0; i < mitad; i++) {
+                izquierda[i] = data[i];
+            }
+
+            for (int i = mitad; i < data.length; i++) {
+                derecha[i - mitad] = data[i];
+            }
+
+            System.out.print("Dividiendo: ");
+            System.out.print("\nIzquierda: ");
+            imprimirArreglo(izquierda);
+            System.out.print("Derecha: ");
+            imprimirArreglo(derecha);
+
+            ///////////////////////////////////// ordenando y combinando
+            merge_sort(izquierda);
+            merge_sort(derecha);
+            merge(data, izquierda, derecha);
+        }
+        System.out.print("Combinando: ");
+        imprimirArreglo(data);
+    }
+    //////////////////////////////////////////// "marge"
+    private static void merge(int[] data, int[] izquierda, int[] derecha) {
+        int i = 0;
+        int d = 0;
+        int k = 0;
+
+        while (i < izquierda.length && d < derecha.length) {
+            if (izquierda[i] < derecha[d]) {
+                data[k] = izquierda[i];
+                i++;
+            } else {
+                data[k] = derecha[d];
+                d++;
+            }
+            k++;
+        }
+
+        ///////////////////////////////////////// Acomodar los restantes
+        while (i < izquierda.length) {
+            data[k] = izquierda[i];
+            i++;
+            k++;
+        }
+        while (d < derecha.length) {
+            data[k] = derecha[d];
+            d++;
+            k++;
+        }
+    }
+    //////////////////////////////////////////// Imprimir el array
+    private static void imprimirArreglo(int[] arreglo) {
+        System.out.print("[");
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.print(arreglo[i]);
+            if (i < arreglo.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+///////////////////////////////////////////////// Ejemplo
+    public static void main(String[] args) {
+
+        int[] info = {38, 27, 43, 3, 9, 82, 10, 19, 50, 61};
+
+        System.out.println("\n.-.-.-.-.-.- MERGE SORT --.-.-.-.-");
+
+        System.out.println("\nLista de elementos: ");
+        imprimirArreglo(info);
+        merge_sort(info);
+        System.out.print("--------------------------------------------");
+        System.out.println("\nLista ordenada: ");
+        imprimirArreglo(info);
+    }
+}
